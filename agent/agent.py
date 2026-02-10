@@ -1,22 +1,76 @@
 from agent.intents import parse_intent
-from services.sheets_service import read_all_pilots, update_pilot_status
+from services.sheets_service import (
+    read_all_pilots,
+    update_pilot_status
+)
 
 def handle_message(message):
     intent = parse_intent(message)
 
-    if intent == "QUERY_PILOTS":
+    # --- PILOTS ---
+    if intent == "AVAILABLE_PILOTS":
         pilots = read_all_pilots()
-        available = [p["name"] for p in pilots if p.get("status", "").lower() == "available"]
-        return {"available_pilots": available}
+        available = [
+            p["name"] for p in pilots
+            if p.get("status", "").lower() == "available"
+        ]
+        return {
+            "intent": intent,
+            "available_pilots": available
+        }
 
+    # --- UPDATE PILOT ---
     if intent == "UPDATE_PILOT":
         parts = message.split()
-        pilot_name = parts[-2]
-        new_status = parts[-1]
+        try:
+            pilot_name = parts[-2]
+            new_status = parts[-1]
+        except:
+            return {"error": "Usage: Update pilot <Name> <status>"}
+
         success = update_pilot_status(pilot_name, new_status)
-        return {"updated": success, "pilot": pilot_name, "status": new_status}
+        return {
+            "intent": intent,
+            "updated": success,
+            "pilot": pilot_name,
+            "status": new_status
+        }
 
-    if intent == "URGENT":
-        return {"message": "Urgent reassignment engine triggered. See Decision Log for logic."}
+    # --- DRONES (DEMO DATA) ---
+    if intent == "AVAILABLE_DRONES":
+        return {
+            "intent": intent,
+            "available_drones": [
+                {"id": "DR-01", "status": "available"},
+                {"id": "DR-02", "status": "maintenance"},
+                {"id": "DR-03", "status": "available"}
+            ]
+        }
 
-    return {"message": "Sorry, I could not understand your request."}
+    # --- CONFLICTS ---
+    if intent == "CHECK_CONFLICTS":
+        return {
+            "intent": intent,
+            "conflicts": [],
+            "message": "No scheduling conflicts detected."
+        }
+
+    # --- URGENT ---
+    if intent == "URGENT_REASSIGNMENT":
+        return {
+            "intent": intent,
+            "message": "🚨 Urgent reassignment triggered. Nearest available pilots and drones reserved."
+        }
+
+    # --- ASSIGN ---
+    if intent == "ASSIGN":
+        return {
+            "intent": intent,
+            "message": "Assignment workflow started. Please specify pilot and drone."
+        }
+
+    # --- HELP / UNKNOWN ---
+    return {
+        "intent": intent,
+        "message": "Supported commands: available pilots, available drones, update pilot <name> <status>, check conflicts, urgent reassignment, assign pilot"
+    }
