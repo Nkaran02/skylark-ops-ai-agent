@@ -1,17 +1,3 @@
-// async function send() {
-//   const msg = document.getElementById("msg").value;
-
-//   const res = await fetch("/agent/chat", {
-//     method: "POST",
-//     headers: {"Content-Type": "application/json"},
-//     body: JSON.stringify({message: msg})
-//   });
-
-//   const data = await res.json();
-//   document.getElementById("chat").innerHTML +=
-//     `<pre>${JSON.stringify(data, null, 2)}</pre>`;
-// }
-
 const API_BASE = "http://127.0.0.1:8000";
 
 function addUserMessage(text) {
