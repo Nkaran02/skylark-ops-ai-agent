@@ -1,10 +1,4 @@
-/* body { font-family: Arial; background: #0f172a; color: white; }
-#chat { background: #020617; padding: 10px; height: 300px; overflow-y: auto; }
-input { width: 70%; }
-button { padding: 6px; } */
-
-
-body {
+/* body {
   font-family: "Segoe UI", Arial, sans-serif;
   background: linear-gradient(135deg, #020617, #020617);
   color: #e5e7eb;
@@ -92,4 +86,106 @@ header p {
 
 .input-bar button:hover {
   background: #0ea5e9;
+} */
+
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #f4f1ee, #e9e4f0);
+  color: #3f3a4a;
+  margin: 0;
+  padding: 0;
+}
+
+.app-container {
+  max-width: 900px;
+  margin: 30px auto;
+  background: #faf9fb;
+  border-radius: 14px;
+  box-shadow: 0 20px 40px rgba(63, 58, 74, 0.15);
+  padding: 22px;
+  border: 1px solid #e6e1ec;
+}
+
+header {
+  border-bottom: 1px solid #e6e1ec;
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+}
+
+header h1 {
+  margin: 0;
+  color: #6b5ca5; /* lavender */
+  font-weight: 600;
+}
+
+header p {
+  margin: 4px 0 0;
+  color: #8a8199;
+  font-size: 14px;
+}
+
+.chat-box {
+  background: #ffffff;
+  border: 1px solid #e6e1ec;
+  border-radius: 10px;
+  padding: 14px;
+  height: 400px;
+  overflow-y: auto;
+  margin-bottom: 14px;
+  font-size: 14px;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.msg-user {
+  color: #7a5c3e; /* warm brown */
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.msg-agent {
+  color: #5e548e; /* soft lavender */
+  margin-bottom: 16px;
+  white-space: pre-wrap;
+}
+
+.input-bar {
+  display: flex;
+  gap: 10px;
+}
+
+.input-bar input {
+  flex: 1;
+  padding: 11px;
+  border-radius: 8px;
+  border: 1px solid #d8d2e5;
+  background: #ffffff;
+  color: #3f3a4a;
+  font-size: 14px;
+}
+
+.input-bar input::placeholder {
+  color: #9b94a6;
+}
+
+.input-bar input:focus {
+  outline: none;
+  border-color: #b8a9dc;
+  box-shadow: 0 0 0 2px rgba(184, 169, 220, 0.25);
+}
+
+.input-bar button {
+  padding: 11px 20px;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(135deg, #b8a9dc, #a08bd3);
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.input-bar button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(160, 139, 211, 0.35);
 }
